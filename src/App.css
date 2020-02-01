@@ -1,38 +1,75 @@
+@import '~antd/dist/antd.css';
 .App {
   text-align: center;
+  width: 50%;
+  margin: auto;
+  min-height: 90vh;
+ 
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  width: 99.9%;
+  margin: auto;
+  background-color: #1890ff;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding-top: 10px;
+}
+h1{
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.main{
+  width: 100%;
+}
+form{
+display: flex;
+flex-direction: row;
+width: 100%;
+margin: 20px auto auto auto;
+box-shadow: 0 0 5px 1px #ddd;
+padding:25px;
+}
+form input{
+  width: 80%;
+  padding: 10px;
+ }
+ form button{
+  width: 19%;
+  padding: 10px;
+  margin-left: 10px;
+ }
+ul{
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  width: 100%;
+  margin: 20px auto auto;
+  padding: 10px; 
+  box-shadow: 0 0 5px 1px #ddd;
+  min-height: 70vh;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+ul .listItem{
+  width: 98%;
+  display: flex;
+  margin-left: auto;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
+.listItem button{
+  margin-left: 5px;
+}
+.listItem li{
+text-align: left;
+min-width: 85%;
+border: 1px solid #ccc;
+margin-top: 8px;
+padding: 10px;
+}
+.delIcon{
+  height: 20px;
+}
+
