@@ -1,17 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FormComponent from './components/Form'
 import TaskList from './components/TaskList'
 import './App.css';
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+
+  const [todos, setTodos] = useState([]);
   const [value, setValue] = useState('');
 
-  const onHandleChange = e => {
+  useEffect(() => {
+    fetch('/find/todos')
+      .then(res => res.json())
+      .then(data => setTodos(data))
 
-    setValue(e.target.value)
+  }, [])
 
-  }
+  const onHandleChange = e => setValue(e.target.value)
+
 
   const onHandleSubmit = e => {
 
@@ -19,12 +24,33 @@ function App() {
 
     const newTask = value;
 
+    const body = {
+
+      name: newTask,
+      id: Date.now(),
+
+    }
+
     if (newTask !== '') {
 
-      setTasks([...tasks, { id: Date.now(), title: newTask, completed: false }])
+
+      // fetch('/add/todos', {
+      //   method: 'post',
+      //   body: JSON.stringify(body),
+      //   headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+      // })
+      //   .then(res => console.log(res.json()))
+      //   .then(() => {
+      //     setTodos([...todos, { id: Date.now(), title: newTask, completed: false }])
+      //   })
+
+
+      setTodos([...todos, { id: Date.now(), todo_name: newTask, completed: false }])
+
+
 
       setValue('')
-      console.log(tasks);
+      console.log(todos);
 
 
     }
@@ -34,21 +60,21 @@ function App() {
 
   }
   const onHandleDelete = (index) => {
-    const filteredTasks = tasks.filter((task, i) => i !== index);
-    setTasks(filteredTasks)
+    const filteredTodos = todos.filter((task, i) => i !== index);
+    setTodos(filteredTodos)
 
   }
 
   const toggleComplete = (id) => {
 
-    tasks.map(task => {
-      if (task.id == id) {
+    todos.map(task => {
+      if (task.id === id) {
 
         task.completed = !task.completed
 
       }
     })
-    setTasks([...tasks])
+    setTodos([...todos])
   }
 
   return (
@@ -58,7 +84,7 @@ function App() {
       </header>
       <div className='main'>
         <FormComponent handleChange={onHandleChange} userInput={value} handleSubmit={onHandleSubmit} />
-        <TaskList items={tasks} handleDelete={onHandleDelete} toggleComplete={id => toggleComplete(id)} />
+        <TaskList items={todos} handleDelete={onHandleDelete} toggleComplete={id => toggleComplete(id)} handleChange={onHandleChange} />
       </div>
     </div>
   );
